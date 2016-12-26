@@ -8,13 +8,15 @@ var keys = require('./secret/keys')
 
 function getKey(e){
 	var key = e.keyCode
-	console.log(key)
 	switch(key){
 		case 84:
 			train();
 			break;
 		case 87:
-			getLatLong();			
+			getLatLong().then((data)=>{
+				console.log('in the then')
+				console.log(data)
+			})			
 			break;
 		case 78:
 			console.log('in news, hit 78')
@@ -41,15 +43,20 @@ window.addEventListener('keyup', getKey)
 
 function getLatLong(){
 	var zip = document.getElementById('weather-zip').value
-	console.log(zip)
 	var key = keys.google
-	console.log(key)
-	console.log("https://maps.googleapis.com/maps/api/geocode/json?address="+zip+"&key="+key)
 	return new Promise(function(resolve, reject){
 		fetch("https://maps.googleapis.com/maps/api/geocode/json?address="+zip+"&key="+key,{
 			method: "GET"
 		}).then((response) =>{
-			console.log(response)
+			if(response.status >= 400){
+				response.json().then((body)=>{
+					reject(new Error(body.error))
+				})
+			}
+			response.json().then((body)=>{
+				var locationInfo = body.results[0].geometry.location
+				resolve(locationInfo)
+			})
 		})
 	})
 }
