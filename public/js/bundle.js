@@ -14,8 +14,10 @@ function getKey(e){
 			break;
 		case 87:
 			getLatLong().then((data)=>{
-				console.log('in the then')
-				weather(data.lat,data.lng)
+				getWeather(data.lat,data.lng).then((data)=>{
+					var text= "Current weather " + data.current.summary
+					addText(weather, text)
+				})
 			})			
 			break;
 		case 78:
@@ -30,9 +32,8 @@ function train(){
 	console.log('in train, hit 84')			
 }
 
-function weather(lat, long){
+function getWeather(lat, long){
 	var key = keys.forecast
-	console.log("https://api.darksky.net/forecast/"+key+"/"+lat+","+long)
 	return new Promise(function(resolve, reject){
 		fetch("https://api.darksky.net/forecast/"+key+"/"+lat+","+long,{
 			method: "GET"
@@ -43,19 +44,21 @@ function weather(lat, long){
 				})
 			}
 			response.json().then((body)=>{
-				// apparent temperature, summary, precipProbability
-				console.log(body.currently)
-				console.log(body.daily)
+				var weatherInfo = {current: body.currently, daily: body.daily}
+				resolve(weatherInfo)
 			})
 		})
 	})
 }
 
+function addText(divName, info){
+	var content = document.createTextNode(info);
+	divName.appendChild(content);
+}
+
 function news(){
 	console.log('news')
 }
-
-window.addEventListener('keyup', getKey)
 
 
 function getLatLong(){
@@ -77,6 +80,9 @@ function getLatLong(){
 		})
 	})
 }
+
+
+window.addEventListener('keyup', getKey)
 },{"./secret/keys":2}],2:[function(require,module,exports){
 var keys = {
 	forecast: "49a6e10c13411ac75c7c0ace5f506ea1",
