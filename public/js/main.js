@@ -14,7 +14,7 @@ function getKey(e){
 		case 87:
 			getLatLong().then((data)=>{
 				console.log('in the then')
-				console.log(data)
+				weather(data.lat,data.lng)
 			})			
 			break;
 		case 78:
@@ -29,8 +29,25 @@ function train(){
 	console.log('in train, hit 84')			
 }
 
-function weather(){
-	console.log('weather')
+function weather(lat, long){
+	var key = keys.forecast
+	console.log("https://api.darksky.net/forecast/"+key+"/"+lat+","+long)
+	return new Promise(function(resolve, reject){
+		fetch("https://api.darksky.net/forecast/"+key+"/"+lat+","+long,{
+			method: "GET"
+		}).then((response)=>{
+				if(response.status >= 400){
+				response.json().then((body)=>{
+					reject(new Error(body.error))
+				})
+			}
+			response.json().then((body)=>{
+				// apparent temperature, summary, precipProbability
+				console.log(body.currently)
+				console.log(body.daily)
+			})
+		})
+	})
 }
 
 function news(){
