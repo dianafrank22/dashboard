@@ -14,12 +14,16 @@ function getKey(e){
 		case 87:
 			getLatLong().then((data)=>{
 				getWeather(data.lat,data.lng).then((data)=>{
+					console.log(data)
 					var text= "Current weather " + data.current.summary
 					addText(weather, text)
 				})
 			})			
 			break;
 		case 78:
+		// change this for type of news? 
+		// get tech, upshot, politics, national
+
 			console.log('in news, hit 78')
 			break;
 		default:
@@ -55,8 +59,22 @@ function addText(divName, info){
 	divName.appendChild(content);
 }
 
-function news(){
-	console.log('news')
+function news(type){
+	var key = keys.newyorktimes
+	return new Promise(function(resolve, reject){
+		fetch("https://api.nytimes.com/svc/topstories/v2/"+type+".json?api-key="+key,{
+			method:"GET"
+		}).then((response) => {
+			if(response.status >= 400){
+				response.json().then((body) => {
+					reject(new Error(body.error))
+				})
+			}
+			response.json().then((body) =>{
+				console.log(body)
+			})
+		})
+	})
 }
 
 
