@@ -9,6 +9,7 @@ var keys = require('./secret/keys')
 function getKey(e){
 	var key = e.keyCode
 	switch(key){
+		// change train to lirr? 
 		case 84:
 			train();
 			break;
@@ -22,11 +23,31 @@ function getKey(e){
 			})			
 			break;
 		case 78:
-			console.log('in news, hit 78')
+			createButtons()
+		// change this to show buttons to select which type of news to get 
+			// news(national)
+		// change this for type of news? 
+		// get technology, upshot, politics, national
 			break;
 		default:
 			console.log('no api called')
 	}
+}
+
+function createButtons(){
+ var titles = ["Tech", "Upshot", "Politics", "National"]
+ for(let i =0; i < titles.length; i++){
+ 	var btn = document.createElement("BUTTON");
+ 	var title = document.createTextNode(titles[i]);
+ 	btn.appendChild(title)
+ 	btn.setAttribute("id", titles[i])
+ 	btn.setAttribute("class", "newsBtn")
+ 	document.getElementById('news').appendChild(btn)
+ }
+}
+
+function checkButton(){
+
 }
 
 function train(){
@@ -58,10 +79,9 @@ function addText(divName, info){
 }
 
 function news(type){
-	// get tech, upshot, politics, national
 	var key = keys.newyorktimes
 	return new Promise(function(resolve, reject){
-		fetch("",{
+		fetch("https://api.nytimes.com/svc/topstories/v2/"+type+".json?api-key="+key,{
 			method:"GET"
 		}).then((response) => {
 			if(response.status >= 400){

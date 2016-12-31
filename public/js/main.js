@@ -10,7 +10,7 @@ function getKey(e){
 	switch(key){
 		// change train to lirr? 
 		case 84:
-			news(technology)
+			train();
 			break;
 		case 87:
 			getLatLong().then((data)=>{
@@ -22,20 +22,31 @@ function getKey(e){
 			})			
 			break;
 		case 78:
-			news(national)
-			break;
-		case 85:
-			news(upshot)
-			break;
-		case 80:
-			news(politics)
-			break;
-		case 76:
-			train();
+			createButtons()
+		// change this to show buttons to select which type of news to get 
+			// news(national)
+		// change this for type of news? 
+		// get technology, upshot, politics, national
 			break;
 		default:
 			console.log('no api called')
 	}
+}
+
+function createButtons(){
+ var titles = ["Tech", "Upshot", "Politics", "National"]
+ for(let i =0; i < titles.length; i++){
+ 	var btn = document.createElement("BUTTON");
+ 	var title = document.createTextNode(titles[i]);
+ 	btn.appendChild(title)
+ 	btn.setAttribute("id", titles[i])
+ 	btn.setAttribute("class", "newsBtn")
+ 	document.getElementById('news').appendChild(btn)
+ }
+}
+
+function checkButton(){
+
 }
 
 function train(){
