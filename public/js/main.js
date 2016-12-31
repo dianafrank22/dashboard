@@ -8,8 +8,9 @@ var keys = require('./secret/keys')
 function getKey(e){
 	var key = e.keyCode
 	switch(key){
+		// change train to lirr? 
 		case 84:
-			train();
+			news(technology)
 			break;
 		case 87:
 			getLatLong().then((data)=>{
@@ -21,10 +22,16 @@ function getKey(e){
 			})			
 			break;
 		case 78:
-		// change this for type of news? 
-		// get tech, upshot, politics, national
-
-			console.log('in news, hit 78')
+			news(national)
+			break;
+		case 85:
+			news(upshot)
+			break;
+		case 80:
+			news(politics)
+			break;
+		case 76:
+			train();
 			break;
 		default:
 			console.log('no api called')
