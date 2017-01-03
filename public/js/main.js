@@ -11,10 +11,13 @@ function getKey(e){
 			break;
 		case 87:
 			getLatLong().then((data)=>{
-				getWeather(data.lat,data.lng).then((data)=>{
-					console.log(data)
-					var text= "Current weather " + data.current.summary
-					addText(weather, text)
+				getCurrentWeather(data.lat,data.lng).then((info)=>{
+					console.log(info)
+					getDailyWeather(data.lat,data.lng).then((data)=>{
+						console.log(data)
+							// var text= "Current weather " + data.current.summary
+							// addText(weather, text)
+					})
 				})
 			})			
 			break;
@@ -103,7 +106,7 @@ function callNews(e){
 }
 
 // weather functions
-function getWeather(lat, long){
+function getCurrentWeather(lat, long){
 	var key = keys.forecast
 	return new Promise(function(resolve, reject){
 		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial",{
@@ -117,6 +120,25 @@ function getWeather(lat, long){
 			response.json().then((body)=>{
 				console.log(body)
 				// var weatherInfo = {current: body.currently, daily: body.daily}
+				resolve(body)
+			})
+		})
+	})
+}
+
+function getDailyWeather(lat, long){
+	var key = keys.forecast
+	return new Promise(function(resolve, reject){
+		fetch("http://api.openweathermap.org/data/2.5/forecast/daily?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial&cnt=7",{
+			method: "GET"
+		}).then((response)=>{
+				if(response.status >= 400){
+				response.json().then((body)=>{
+					reject(new Error(body.error))
+				})
+			}
+			response.json().then((body)=>{
+				console.log(body)
 				resolve(body)
 			})
 		})
