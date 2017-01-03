@@ -99,10 +99,6 @@ function callNews(e){
 			newsDiv.appendChild(h4)
 			newsDiv.appendChild(p)
 		}
-		// news-results div class 
-		// have to loop through data.results
-		// get title, url, abstract (like summary), byline (author)
-		// parse data here, then send it to addText
 	})
 }
 
@@ -110,7 +106,7 @@ function callNews(e){
 function getWeather(lat, long){
 	var key = keys.forecast
 	return new Promise(function(resolve, reject){
-		fetch("https://api.darksky.net/forecast/"+key+"/"+lat+","+long,{
+		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial",{
 			method: "GET"
 		}).then((response)=>{
 				if(response.status >= 400){
@@ -119,8 +115,9 @@ function getWeather(lat, long){
 				})
 			}
 			response.json().then((body)=>{
-				var weatherInfo = {current: body.currently, daily: body.daily}
-				resolve(weatherInfo)
+				console.log(body)
+				// var weatherInfo = {current: body.currently, daily: body.daily}
+				resolve(body)
 			})
 		})
 	})

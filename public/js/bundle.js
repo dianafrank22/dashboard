@@ -100,10 +100,6 @@ function callNews(e){
 			newsDiv.appendChild(h4)
 			newsDiv.appendChild(p)
 		}
-		// news-results div class 
-		// have to loop through data.results
-		// get title, url, abstract (like summary), byline (author)
-		// parse data here, then send it to addText
 	})
 }
 
@@ -111,7 +107,7 @@ function callNews(e){
 function getWeather(lat, long){
 	var key = keys.forecast
 	return new Promise(function(resolve, reject){
-		fetch("https://api.darksky.net/forecast/"+key+"/"+lat+","+long,{
+		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial",{
 			method: "GET"
 		}).then((response)=>{
 				if(response.status >= 400){
@@ -120,8 +116,9 @@ function getWeather(lat, long){
 				})
 			}
 			response.json().then((body)=>{
-				var weatherInfo = {current: body.currently, daily: body.daily}
-				resolve(weatherInfo)
+				console.log(body)
+				// var weatherInfo = {current: body.currently, daily: body.daily}
+				resolve(body)
 			})
 		})
 	})
@@ -163,7 +160,7 @@ function addText(divName, info){
 
 },{"./secret/keys":2}],2:[function(require,module,exports){
 var keys = {
-	forecast: "49a6e10c13411ac75c7c0ace5f506ea1",
+	forecast: "e4b4bcad56d71ace4eab583858a4b305",
 	newyorktimes: "a772dc3238a3480591085ec85e9986b1",
 	google: "AIzaSyAdzbJmIaEY7zzxDMc1PAC31Paq6AEqQSE",
 	mta: "0d05ae482bda033ad7c31c8ded81a7f8"

@@ -10,20 +10,22 @@
 
 <div class="dashboard">
 
-<div data-key="84" class="dash-section train">
-	<kdb>T</kdb>
+<div data-key="84" id="train" class="dash-section train">
+	<kdb>L</kdb>
 </div>
 
-<div data-key="87" class="dash-section weather">
+<div data-key="87" id="weather" class="dash-section weather">
+<input type="text" id="weather-zip"/>
 <kdb> W </kdb>
 </div>
 
-<div data-key="78" class="dash-section news">
+<div data-key="78" id="news" class="dash-section news">
 <kdb> N </kdb>
+<div id="news-results"> </div>
 </div>
 
 
 </div>
-<script src="./js/main.js"></script>
+<script src="./js/bundle.js"></script>
 </body>
 </html>
