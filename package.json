@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass --include-path scss scss/style.scss public/css/main.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +17,9 @@
     "express": "^4.14.0",
     "morgan": "^1.7.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "node-sass": "^4.1.1",
+    "nodemon": "^1.11.0"
   }
 }
