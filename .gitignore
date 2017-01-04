@@ -4,4 +4,4 @@ node_modules
 
 secret
 
-bundle.js
+public/js/bundle.js
