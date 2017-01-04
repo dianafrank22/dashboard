@@ -1,4 +1,5 @@
 /* CSS Normalize */
+@import url("https://fonts.googleapis.com/css?family=Oswald");
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
@@ -129,12 +130,35 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 .container {
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
-  flex-direction: row; }
+  height: 90vh;
+  width: 90vw;
+  flex-direction: row;
+  background-color: #C2C4C4;
+  margin: 0 auto 0 auto;
+  margin-top: 5vh; }
 
 .dash-section {
   flex-grow: 1; }
 
 body {
   margin: 0;
-  background-color: #fefefe; }
+  background-color: #F8F8F8; }
+
+kbd {
+  background-color: #000000;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #F8F8F8;
+  font-size: 15px;
+  line-height: 1.4;
+  margin-top: 4em;
+  padding: .3em .9em;
+  text-shadow: 0 1px 0 #fff;
+  font-family: "Oswald", sans-serif; }
+
+.newsBtn {
+  background-color: #000000;
+  color: #0ABDA0;
+  border-style: none;
+  box-shadow: 0 2px 1px #6e6e6e;
+  margin: 5px; }

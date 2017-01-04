@@ -39,7 +39,7 @@ function createButtons(){
 	if(news.childNodes.length > 5){
 		//buttons already created
 	}else{
-		 var titles = ["Technology", "Upshot", "Politics", "National"]
+		 var titles = ["technology", "upshot", "politics", "national"]
 		 for(let i =0; i < titles.length; i++){
  			var btn = document.createElement("BUTTON");
 		 	var title = document.createTextNode(titles[i]);
@@ -68,6 +68,7 @@ function news(btn){
 			}
 			response.json().then((body) =>{
 				resolve(body)
+				callNews(body)
 			})
 		})
 	})
@@ -76,14 +77,14 @@ function news(btn){
 function addClickToButton(){
 	var buttons = document.getElementsByClassName("newsBtn");
 	for(let i =0; i <buttons.length; i++){
-		buttons[i].addEventListener('click', callNews, false)
+		buttons[i].addEventListener('click', news, false)
 	}	
 }
 
 
-function callNews(e){
-	news(e).then((data)=>{
+function callNews(data){
 		var newsDiv = document.getElementById("news-results")
+		newsDiv.innerHTML = ""
 		var newsArray = data.results
 		for(var i=0; i < newsArray.length; i++){
 			var h2 = document.createElement('H2');
@@ -102,7 +103,6 @@ function callNews(e){
 			newsDiv.appendChild(h4)
 			newsDiv.appendChild(p)
 		}
-	})
 }
 
 // weather functions
