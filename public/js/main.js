@@ -1,5 +1,5 @@
-var keys = require('./secret/keys')
-
+var keys = require('../../config')
+console.log(keys)
 window.addEventListener('keyup', getKey)
 
 
@@ -56,6 +56,7 @@ function createButtons(){
 
 function news(btn){
 	var key = keys.newyorktimes
+	console.log(key)
 	var type = btn.target.id
 	return new Promise(function(resolve, reject){
 		fetch("https://api.nytimes.com/svc/topstories/v2/"+type+".json?api-key="+key,{
@@ -128,6 +129,7 @@ function getCurrentWeather(lat, long){
 
 function getDailyWeather(lat, long){
 	var key = keys.forecast
+	console.log(key)
 	return new Promise(function(resolve, reject){
 		fetch("http://api.openweathermap.org/data/2.5/forecast/daily?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial&cnt=7",{
 			method: "GET"

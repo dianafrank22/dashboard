@@ -8,16 +8,15 @@ news (New York Times)
 
 
 ##Technologies Used and Why 
-**node**
-**express**
-**dotenv**
-**morgan**
-**node-sass**
-**nodemon**
-**body-parser**
-**require.js**
-**browserify**
-**watchify**
+**[node](https://github.com/nodejs/node)** 
+**[express]()** - minimalist framework for node
+**[dotenv](https://www.npmjs.com/package/dotenv)** - used to store enviroment variables
+**[morgan](https://www.npmjs.com/package/morgan)** - middleware to log HTTP requests, using **dev** version for "output colored by response status"
+**[node-sass](https://github.com/sass/node-sass)** - NPM library that allows for compiling of Sass to CSS.
+**nodemon** - used to watch files for changes, and will automatically restart the application.
+**require.js** - a javascript file and module loader
+**browserify** - allows you to require modules in the browser by bundling all of your dependencies
+**watchify** - watch for browserify builds
 
 
 ##Things Left To Do
