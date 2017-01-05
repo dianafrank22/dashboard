@@ -1,4 +1,3 @@
-var keys = require('../../config')
 window.addEventListener('keyup', getKey)
 
 
@@ -9,16 +8,7 @@ function getKey(e){
 			train();
 			break;
 		case 87:
-			getLatLong().then((data)=>{
-				getCurrentWeather(data.lat,data.lng).then((info)=>{
-					console.log(info)
-					getDailyWeather(data.lat,data.lng).then((data)=>{
-						console.log(data)
-							// var text= "Current weather " + data.current.summary
-							// addText(weather, text)
-					})
-				})
-			})			
+			getCurrentWeather();		
 			break;
 		case 78:
 			createButtons()
@@ -105,67 +95,25 @@ function callNews(data){
 		}
 }
 
+
+
+
 // weather functions
-function getCurrentWeather(lat, long){
-	var key = keys.forecast
-	return new Promise(function(resolve, reject){
-		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial",{
-			method: "GET"
-		}).then((response)=>{
-				if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				console.log(body)
-				// var weatherInfo = {current: body.currently, daily: body.daily}
-				resolve(body)
-			})
-		})
-	})
-}
-
-function getDailyWeather(lat, long){
-	var key = keys.forecast
-	console.log(key)
-	return new Promise(function(resolve, reject){
-		fetch("http://api.openweathermap.org/data/2.5/forecast/daily?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial&cnt=7",{
-			method: "GET"
-		}).then((response)=>{
-				if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				console.log(body)
-				resolve(body)
-			})
-		})
-	})
-}
-
-
-function getLatLong(){
+function getCurrentWeather(){
 	var zip = document.getElementById('weather-zip').value
-	var key = keys.google
-	return new Promise(function(resolve, reject){
-		fetch("https://maps.googleapis.com/maps/api/geocode/json?address="+zip+"&key="+key,{
-			method: "GET"
-		}).then((response) =>{
-			if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				var locationInfo = body.results[0].geometry.location
-				resolve(locationInfo)
-			})
-		})
+	fetch('/weather/current?zip='+zip).then((info)=>{
+		console.log(info)
+		getDailyWeather()
 	})
 }
+
+function getDailyWeather(){
+	console.log('in daily weather')
+	fetch('/weather/getDailyWeather').then((info)=>{
+		console.log(info)
+	})
+}
+
 
 function train(){
 	console.log('in train, hit 84')			
