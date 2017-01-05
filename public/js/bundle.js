@@ -188,12 +188,11 @@ var keys = {
 	google: process.env.GOOGLE,
 	mta: process.env.MTA
 }
-
+console.log(keys)
 module.exports = keys
 }).call(this,require('_process'))
 },{"_process":1}],3:[function(require,module,exports){
 var keys = require('../../config')
-console.log(keys)
 window.addEventListener('keyup', getKey)
 
 

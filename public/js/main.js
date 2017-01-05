@@ -1,5 +1,4 @@
 var keys = require('../../config')
-console.log(keys)
 window.addEventListener('keyup', getKey)
 
 

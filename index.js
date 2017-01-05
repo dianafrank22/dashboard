@@ -1,5 +1,5 @@
-// require('dotenv').config();
-// console.log(process.env)
+require('dotenv').config();
+console.log(process.env.FORECAST)
 
 const express      = require('express');
 const logger       = require('morgan');
