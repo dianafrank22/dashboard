@@ -5,12 +5,12 @@ const { getLatLong,
 
 
 router.get('/current', getLatLong, getCurrentWeather, (req, res)=>{
-	console.log(res.currentWeather)
-	res.json({weather: res.currentWeather})
+	res.json({locationInfo: res.locationInfo, weather: res.currentWeather})
 });
 
-router.get('/getDailyWeather', getLatLong, getDailyWeather, (req, res)=>{
+router.get('/getDailyWeather', getDailyWeather, (req, res)=>{
 	console.log(res.dailyWeather)
+	console.log('got daily weather')
 	res.json({dailyWeather: res.dailyWeather})
 });
 

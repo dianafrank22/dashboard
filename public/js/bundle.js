@@ -103,15 +103,18 @@ function callNews(data){
 function getCurrentWeather(){
 	var zip = document.getElementById('weather-zip').value
 	fetch('/weather/current?zip='+zip).then((info)=>{
-		console.log(info)
-		getDailyWeather()
+		info.json().then((body)=>{	
+			var locationInfo = body.locationInfo
+			getDailyWeather(locationInfo.lat, locationInfo.lng)
+		})
 	})
 }
 
-function getDailyWeather(){
-	console.log('in daily weather')
-	fetch('/weather/getDailyWeather').then((info)=>{
-		console.log(info)
+function getDailyWeather(lat, lng){
+	fetch('/weather/getDailyWeather?lat='+lat+'&long='+lng).then((info)=>{
+		info.json().then((body)=>{	
+			console.log(body)
+		})
 	})
 }
 
