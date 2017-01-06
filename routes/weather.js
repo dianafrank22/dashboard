@@ -9,8 +9,6 @@ router.get('/current', getLatLong, getCurrentWeather, (req, res)=>{
 });
 
 router.get('/getDailyWeather', getDailyWeather, (req, res)=>{
-	console.log(res.dailyWeather)
-	console.log('got daily weather')
 	res.json({dailyWeather: res.dailyWeather})
 });
 

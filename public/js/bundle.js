@@ -45,25 +45,15 @@ function createButtons(){
 
 
 function news(btn){
-	var key = keys.newyorktimes
-	console.log(key)
 	var type = btn.target.id
-	return new Promise(function(resolve, reject){
-		fetch("https://api.nytimes.com/svc/topstories/v2/"+type+".json?api-key="+key,{
-			method:"GET"
-		}).then((response) => {
-			if(response.status >= 400){
-				response.json().then((body) => {
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body) =>{
-				resolve(body)
-				callNews(body)
-			})
+	fetch('/news?type='+type).then((info)=>{
+		info.json((body)=>{
+			console.log(body)
+			parseNews(body)
 		})
 	})
 }
+
 
 function addClickToButton(){
 	var buttons = document.getElementsByClassName("newsBtn");
@@ -73,7 +63,7 @@ function addClickToButton(){
 }
 
 
-function callNews(data){
+function parseNews(data){
 		var newsDiv = document.getElementById("news-results")
 		newsDiv.innerHTML = ""
 		var newsArray = data.results

@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express      = require('express');
 const logger       = require('morgan');
 const path         = require('path');
@@ -7,7 +5,7 @@ const bodyParser   = require('body-parser');
 const home         = require('./routes/home');
 const weather      = require('./routes/weather')
 // const train        = require('./routes/train')
-// const news         = require('./routes/news')
+const news         = require('./routes/news')
 const app          = express();
 const port         = process.env.PORT || 3000;
 
@@ -29,4 +27,4 @@ app.listen(port, () =>{
 app.use('/', home);
 app.use('/weather', weather);
 // app.use('/train', train);
-// app.use('/news', news);
+app.use('/news', news);
