@@ -101,11 +101,15 @@ function addCurrentWeather(currentWeather){
 	var h2               = document.createElement('H2')
 	var title            = document.createTextNode('Current Weather in '+currentWeather.name)
 	h2.appendChild(title)
-	weatherDiv.appendChild(h2)
-	var h3               = document.createElement('H3')
+	var h4               = document.createElement('H4')
 	var forecast         = document.createTextNode("Current conditions "+currentWeather.weather[0].description+" with temperatures around "+currentWeather.main.temp)
-	h3.appendChild(forecast)
-	weatherDiv.appendChild(h3) 
+	h4.appendChild(forecast)
+	var icon = "http://openweathermap.org/img/w/"+currentWeather.weather[0].icon+ ".png";
+	var img = document.createElement('img')
+	img.src = icon
+	weatherDiv.appendChild(h2)
+	weatherDiv.appendChild(img)
+	weatherDiv.appendChild(h4) 
 }
 
 function getDailyWeather(lat, lng, currentWeather){
