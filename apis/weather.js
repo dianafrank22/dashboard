@@ -1,11 +1,9 @@
-const KEY        = process.env.FORECAST
+const API_KEY    = process.env.FORECAST
 const GOOGLEKEY  = process.env.GOOGLE
 const fetch      = require('node-fetch');
 
-
-
-function getLatLong(req,res, next){
-	let zip = req.query.zip
+function getLatLong(req, res, next){
+		let zip = req.query.zip
 		fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=${GOOGLEKEY}`)
 		.then((response) =>{
 			response.json().then((body)=>{
@@ -24,7 +22,7 @@ function getLatLong(req,res, next){
 function getCurrentWeather(req, res, next){
 	var lat = res.locationInfo.lat
 	var long = res.locationInfo.lng
-	fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${KEY}&mode=json&units=imperial`)
+	fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${API_KEY}&mode=json&units=imperial`)
 	.then((response)=>{
 		response.json().then((body)=>{
 			res.currentWeather = body
@@ -41,7 +39,7 @@ function getCurrentWeather(req, res, next){
 function getDailyWeather(req, res, next){
 		let lat = req.query.lat
 		let long = req.query.long
-		fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&APPID=${KEY}&mode=json&units=imperial&cnt=7`)
+		fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&APPID=${API_KEY}&mode=json&units=imperial&cnt=7`)
 		.then((response)=>{
 			response.json().then((body)=>{
 			res.dailyWeather = body
