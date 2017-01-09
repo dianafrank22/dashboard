@@ -9,20 +9,28 @@ news (New York Times)
 
 ##Technologies Used and Why 
 **[node](https://github.com/nodejs/node)** 
+
 **[express]()** - minimalist framework for node
+
 **[dotenv](https://www.npmjs.com/package/dotenv)** - used to store enviroment variables
+
 **[morgan](https://www.npmjs.com/package/morgan)** - middleware to log HTTP requests, using **dev** version for "output colored by response status"
+
 **[node-sass](https://github.com/sass/node-sass)** - NPM library that allows for compiling of Sass to CSS.
+
 **nodemon** - used to watch files for changes, and will automatically restart the application.
+
 **require.js** - a javascript file and module loader
+
 **browserify** - allows you to require modules in the browser by bundling all of your dependencies
+
 **watchify** - watch for browserify builds
 
 
 ##Things Left To Do
-1. Parse response from weather API
+1. ~~Parse response from weather API~~
 2. Dynamically add response
-3. Add weather icons
+3. ~~Add weather icons~~
 4. Styling 
   1. Styling buttons
   2. Finish Styling News Section

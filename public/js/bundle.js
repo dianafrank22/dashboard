@@ -1,198 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-},{}],2:[function(require,module,exports){
-(function (process){
-var keys = {
-	forecast: process.env.FORECAST,
-	newyorktimes: process.env.NEWYORKTIMES,
-	google: process.env.GOOGLE,
-	mta: process.env.MTA
-}
-console.log(keys)
-module.exports = keys
-}).call(this,require('_process'))
-},{"_process":1}],3:[function(require,module,exports){
-var keys = require('../../config')
 window.addEventListener('keyup', getKey)
 
 
@@ -203,16 +9,7 @@ function getKey(e){
 			train();
 			break;
 		case 87:
-			getLatLong().then((data)=>{
-				getCurrentWeather(data.lat,data.lng).then((info)=>{
-					console.log(info)
-					getDailyWeather(data.lat,data.lng).then((data)=>{
-						console.log(data)
-							// var text= "Current weather " + data.current.summary
-							// addText(weather, text)
-					})
-				})
-			})			
+			getCurrentWeather();		
 			break;
 		case 78:
 			createButtons()
@@ -223,12 +20,8 @@ function getKey(e){
 }
 
 
-
-// news functions
 function createButtons(){
 	var news = document.getElementById('news')
-		console.log(news.childNodes.length)
-
 	if(news.childNodes.length > 5){
 		//buttons already created
 	}else{
@@ -248,25 +41,14 @@ function createButtons(){
 
 
 function news(btn){
-	var key = keys.newyorktimes
-	console.log(key)
 	var type = btn.target.id
-	return new Promise(function(resolve, reject){
-		fetch("https://api.nytimes.com/svc/topstories/v2/"+type+".json?api-key="+key,{
-			method:"GET"
-		}).then((response) => {
-			if(response.status >= 400){
-				response.json().then((body) => {
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body) =>{
-				resolve(body)
-				callNews(body)
-			})
+	fetch('/news?type='+type).then((info)=>{
+		info.json().then((body)=>{
+			parseNews(body)
 		})
 	})
 }
+
 
 function addClickToButton(){
 	var buttons = document.getElementsByClassName("newsBtn");
@@ -276,10 +58,10 @@ function addClickToButton(){
 }
 
 
-function callNews(data){
+function parseNews(data){
 		var newsDiv = document.getElementById("news-results")
 		newsDiv.innerHTML = ""
-		var newsArray = data.results
+		var newsArray = data.news
 		for(var i=0; i < newsArray.length; i++){
 			var h2 = document.createElement('H2');
 			var title = document.createTextNode(newsArray[i].title)
@@ -299,67 +81,49 @@ function callNews(data){
 		}
 }
 
+
 // weather functions
-function getCurrentWeather(lat, long){
-	var key = keys.forecast
-	return new Promise(function(resolve, reject){
-		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial",{
-			method: "GET"
-		}).then((response)=>{
-				if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				console.log(body)
-				// var weatherInfo = {current: body.currently, daily: body.daily}
-				resolve(body)
-			})
-		})
-	})
-}
-
-function getDailyWeather(lat, long){
-	var key = keys.forecast
-	console.log(key)
-	return new Promise(function(resolve, reject){
-		fetch("http://api.openweathermap.org/data/2.5/forecast/daily?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial&cnt=7",{
-			method: "GET"
-		}).then((response)=>{
-				if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				console.log(body)
-				resolve(body)
-			})
-		})
-	})
-}
-
-
-function getLatLong(){
+function getCurrentWeather(){
 	var zip = document.getElementById('weather-zip').value
-	var key = keys.google
-	return new Promise(function(resolve, reject){
-		fetch("https://maps.googleapis.com/maps/api/geocode/json?address="+zip+"&key="+key,{
-			method: "GET"
-		}).then((response) =>{
-			if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				var locationInfo = body.results[0].geometry.location
-				resolve(locationInfo)
-			})
+	fetch('/weather/current?zip='+zip).then((info)=>{
+		info.json().then((body)=>{	
+			var locationInfo = body.locationInfo
+			getDailyWeather(locationInfo.lat, locationInfo.lng)
+			addCurrentWeather(body.weather)
 		})
 	})
 }
+
+function addCurrentWeather(currentWeather){
+	// need to add icon
+	var weatherDiv       = document.getElementById("weather")
+	weatherDiv.innerHTML = ""
+	var h2               = document.createElement('H2')
+	var title            = document.createTextNode('Current Weather in '+currentWeather.name)
+	h2.appendChild(title)
+	var h4               = document.createElement('H4')
+	var forecast         = document.createTextNode("Current conditions "+currentWeather.weather[0].description+" with temperatures around "+currentWeather.main.temp)
+	h4.appendChild(forecast)
+	var icon = "http://openweathermap.org/img/w/"+currentWeather.weather[0].icon+ ".png";
+	var img = document.createElement('img')
+	img.src = icon
+	weatherDiv.appendChild(h2)
+	weatherDiv.appendChild(img)
+	weatherDiv.appendChild(h4) 
+}
+
+function getDailyWeather(lat, lng, currentWeather){
+	fetch('/weather/getDailyWeather?lat='+lat+'&long='+lng).then((info)=>{
+		info.json().then((body)=>{	
+			parseWeather(body)
+		})
+	})
+}
+
+function parseWeather(dailyWeather){
+	// console.log(dailyWeather)
+}
+
 
 function train(){
 	console.log('in train, hit 84')			
@@ -374,4 +138,4 @@ function addText(divName, info){
 
 
 
-},{"../../config":2}]},{},[3]);
+},{}]},{},[1]);
