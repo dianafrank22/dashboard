@@ -1,4 +1,3 @@
-var keys = require('../../config')
 window.addEventListener('keyup', getKey)
 
 
@@ -9,16 +8,7 @@ function getKey(e){
 			train();
 			break;
 		case 87:
-			getLatLong().then((data)=>{
-				getCurrentWeather(data.lat,data.lng).then((info)=>{
-					console.log(info)
-					getDailyWeather(data.lat,data.lng).then((data)=>{
-						console.log(data)
-							// var text= "Current weather " + data.current.summary
-							// addText(weather, text)
-					})
-				})
-			})			
+			getCurrentWeather();		
 			break;
 		case 78:
 			createButtons()
@@ -29,12 +19,8 @@ function getKey(e){
 }
 
 
-
-// news functions
 function createButtons(){
 	var news = document.getElementById('news')
-		console.log(news.childNodes.length)
-
 	if(news.childNodes.length > 5){
 		//buttons already created
 	}else{
@@ -54,25 +40,14 @@ function createButtons(){
 
 
 function news(btn){
-	var key = keys.newyorktimes
-	console.log(key)
 	var type = btn.target.id
-	return new Promise(function(resolve, reject){
-		fetch("https://api.nytimes.com/svc/topstories/v2/"+type+".json?api-key="+key,{
-			method:"GET"
-		}).then((response) => {
-			if(response.status >= 400){
-				response.json().then((body) => {
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body) =>{
-				resolve(body)
-				callNews(body)
-			})
+	fetch('/news?type='+type).then((info)=>{
+		info.json().then((body)=>{
+			parseNews(body)
 		})
 	})
 }
+
 
 function addClickToButton(){
 	var buttons = document.getElementsByClassName("newsBtn");
@@ -82,10 +57,10 @@ function addClickToButton(){
 }
 
 
-function callNews(data){
+function parseNews(data){
 		var newsDiv = document.getElementById("news-results")
 		newsDiv.innerHTML = ""
-		var newsArray = data.results
+		var newsArray = data.news
 		for(var i=0; i < newsArray.length; i++){
 			var h2 = document.createElement('H2');
 			var title = document.createTextNode(newsArray[i].title)
@@ -105,67 +80,49 @@ function callNews(data){
 		}
 }
 
+
 // weather functions
-function getCurrentWeather(lat, long){
-	var key = keys.forecast
-	return new Promise(function(resolve, reject){
-		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial",{
-			method: "GET"
-		}).then((response)=>{
-				if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				console.log(body)
-				// var weatherInfo = {current: body.currently, daily: body.daily}
-				resolve(body)
-			})
-		})
-	})
-}
-
-function getDailyWeather(lat, long){
-	var key = keys.forecast
-	console.log(key)
-	return new Promise(function(resolve, reject){
-		fetch("http://api.openweathermap.org/data/2.5/forecast/daily?lat="+lat+"&lon="+long+"&APPID="+key+"&mode=json&units=imperial&cnt=7",{
-			method: "GET"
-		}).then((response)=>{
-				if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				console.log(body)
-				resolve(body)
-			})
-		})
-	})
-}
-
-
-function getLatLong(){
+function getCurrentWeather(){
 	var zip = document.getElementById('weather-zip').value
-	var key = keys.google
-	return new Promise(function(resolve, reject){
-		fetch("https://maps.googleapis.com/maps/api/geocode/json?address="+zip+"&key="+key,{
-			method: "GET"
-		}).then((response) =>{
-			if(response.status >= 400){
-				response.json().then((body)=>{
-					reject(new Error(body.error))
-				})
-			}
-			response.json().then((body)=>{
-				var locationInfo = body.results[0].geometry.location
-				resolve(locationInfo)
-			})
+	fetch('/weather/current?zip='+zip).then((info)=>{
+		info.json().then((body)=>{	
+			var locationInfo = body.locationInfo
+			getDailyWeather(locationInfo.lat, locationInfo.lng)
+			addCurrentWeather(body.weather)
 		})
 	})
 }
+
+function addCurrentWeather(currentWeather){
+	// need to add icon
+	var weatherDiv       = document.getElementById("weather")
+	weatherDiv.innerHTML = ""
+	var h2               = document.createElement('H2')
+	var title            = document.createTextNode('Current Weather in '+currentWeather.name)
+	h2.appendChild(title)
+	var h4               = document.createElement('H4')
+	var forecast         = document.createTextNode("Current conditions "+currentWeather.weather[0].description+" with temperatures around "+currentWeather.main.temp)
+	h4.appendChild(forecast)
+	var icon = "http://openweathermap.org/img/w/"+currentWeather.weather[0].icon+ ".png";
+	var img = document.createElement('img')
+	img.src = icon
+	weatherDiv.appendChild(h2)
+	weatherDiv.appendChild(img)
+	weatherDiv.appendChild(h4) 
+}
+
+function getDailyWeather(lat, lng, currentWeather){
+	fetch('/weather/getDailyWeather?lat='+lat+'&long='+lng).then((info)=>{
+		info.json().then((body)=>{	
+			parseWeather(body)
+		})
+	})
+}
+
+function parseWeather(dailyWeather){
+	// console.log(dailyWeather)
+}
+
 
 function train(){
 	console.log('in train, hit 84')			
