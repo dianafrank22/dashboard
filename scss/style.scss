@@ -7,18 +7,22 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 
-$background: #C2C4C4;
-$accent1: #270075;
-$accent2: #1D3257;
-$whitespace: #F5FAFA;
-$button-background: #000000;
-$box-shadow: 0 2px 1px #6e6e6e;
+$background: #3F51B5;
+$accent1: #FF4081;
+$accent2: #FF80AB;
+$whitespace: #fefefe;
+$button-background: #303f9f;
+$box-shadow: 0 2px 1px #C5CAE9;
 $auto-margin: 0 auto 0 auto;
 $font: 'Oswald', sans-serif;
 $container-height: 100vh-10vh;
-$container-width: 100vw-10vw;
+$container-width: 100vw;
 
-
+header h1{
+	text-align: center;
+	color: $accent1;
+	font: $font;
+}
 
 .container{
 	display: flex;
@@ -32,7 +36,7 @@ $container-width: 100vw-10vw;
 }
 
 .dash-section{
-	flex-grow: 1;
+	flex-grow: 2;
 } 
 
 
@@ -63,7 +67,7 @@ input#weather-zip{
 
 .newsBtn{
 	background-color: $button-background;
-	color: $whitespace; 
+	color: $accent2; 
 	border-style: none;
 	box-shadow: $box-shadow;
 	margin: 5px;
@@ -80,7 +84,7 @@ a{
 	text-decoration: none;
 	cursor: pointer;
 	h2{
-		color: black;
+		color: $background;
 		font-size: large;
 	}
 }
@@ -93,7 +97,7 @@ h4{
 	}
 p {
 	font-size: small;
-	color: $accent2;
+	color: black;
 }	
 
 }
