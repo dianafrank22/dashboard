@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+// @import ('./mobile')
+
+
+$background: #3F51B5;
+$accent1: #FF4081;
+$accent2: #FF80AB;
+$whitespace: #fefefe;
+$button-background: #303f9f;
+$box-shadow: 0 2px 1px #C5CAE9;
+$auto-margin: 0 auto 0 auto;
+$font: 'Oswald', sans-serif;
+$container-height: 100vh-10vh;
+$container-width: 100vw;
+
+header h1{
+	text-align: center;
+	color: $accent1;
+	font: $font;
+}
+
+.container{
+	display: flex;
+	flex-wrap: wrap;
+	height: $container-height;
+	width: $container-width;
+	flex-direction: row;
+	background-color: $whitespace;
+	margin: $auto-margin;
+	margin-top: 5vh;
+}
+
+.dash-section{
+	flex-grow: 2;
+} 
+
+
+body{
+	margin: 0;
+	background-color: $background;
+}
+
+kbd{
+  	background-color:$button-background;
+    border:1px solid #ccc;
+    border-radius:3px;
+    color:$whitespace;
+    font-size:15px;
+    // add box shadow
+    line-height:1.4;
+    margin: $auto-margin;
+    padding:.4em 1em;
+    text-shadow:0 1px 0 #fff;
+    font-family: $font;
+}
+
+
+input#weather-zip{
+	width: 25%;
+}
+
+.newsBtn{
+	background-color: $button-background;
+	color: $accent2; 
+	border-style: none;
+	box-shadow: $box-shadow;
+	margin: 5px;
+}
+
+#news-results{
+	height: $container-height - 20vh;
+	overflow-y: scroll;
+	font-family: $font;
+	width: $container-width / 3;
+	float: right;
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+	h2{
+		color: $background;
+		font-size: large;
+	}
+}
+
+h4{
+		text-transform: lowercase;
+		font-variant: small-caps;
+		font-size: medium;
+		color: $accent1;
+	}
+p {
+	font-size: small;
+	color: black;
+}	
+
+}

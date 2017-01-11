@@ -36,8 +36,10 @@ news (New York Times)
   2. Finish Styling News Section
   3. Mobile Styling
   4. Style weather
-  5. Style train section
-5. Train Section
+  5. ~~Style train section~~
+5. ~~Train Section
 	1. Write functions for LIRR api call
-	2. parse response
+	2. parse response~~
+6. Switch from key event to button clicks (*better for mobile development*)
+7. create button mixin
 
