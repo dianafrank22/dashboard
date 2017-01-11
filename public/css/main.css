@@ -1,5 +1,98 @@
-/* CSS Normalize */
 @import url("https://fonts.googleapis.com/css?family=Oswald");
+header h1 {
+  text-align: center;
+  color: #FF4081;
+  font: "Oswald", sans-serif; }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 90vh;
+  width: 100vw;
+  flex-direction: row;
+  background-color: #fefefe;
+  margin: 0 auto 0 auto;
+  margin-top: 5vh; }
+
+.dash-section {
+  flex-grow: 2; }
+
+body {
+  margin: 0;
+  background-color: #3F51B5; }
+
+kbd {
+  background-color: #303f9f;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #fefefe;
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0 auto 0 auto;
+  padding: .4em 1em;
+  text-shadow: 0 1px 0 #fff;
+  font-family: "Oswald", sans-serif; }
+
+input#weather-zip {
+  width: 25%; }
+
+.newsBtn {
+  background-color: #303f9f;
+  color: #FF80AB;
+  border-style: none;
+  box-shadow: 0 2px 1px #C5CAE9;
+  margin: 5px; }
+
+#news-results {
+  height: 70vh;
+  overflow-y: scroll;
+  font-family: "Oswald", sans-serif;
+  width: 33.33333vw;
+  float: right; }
+  #news-results a {
+    text-decoration: none;
+    cursor: pointer; }
+    #news-results a h2 {
+      color: #3F51B5;
+      font-size: large; }
+  #news-results h4 {
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-size: medium;
+    color: #FF4081; }
+  #news-results p {
+    font-size: small;
+    color: black; }
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap; }
+  .dash-section {
+    flex-grow: 1; }
+  header h2 {
+    font-size: -webkit-xxx-large; }
+  div#weather {
+    text-align: center; }
+    div#weather img {
+      width: 20%; }
+  div#news-results {
+    width: 90%;
+    margin: 5%;
+    margin-top: 0.5%;
+    text-align: left; }
+    div#news-results h2 {
+      font-size: 1.7em; }
+    div#news-results p {
+      font-size: 1.4em; }
+    div#news-results h4 {
+      font-size: 1.2em; }
+  div#news.dash-section.news kbd {
+    margin-left: 30%; } }
+
+/* CSS Normalize */
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
@@ -126,63 +219,3 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  height: 90vh;
-  width: 90vw;
-  flex-direction: row;
-  background-color: #F5FAFA;
-  margin: 0 auto 0 auto;
-  margin-top: 5vh; }
-
-.dash-section {
-  flex-grow: 1; }
-
-body {
-  margin: 0;
-  background-color: #C2C4C4; }
-
-kbd {
-  background-color: #000000;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  color: #F5FAFA;
-  font-size: 15px;
-  line-height: 1.4;
-  margin: 0 auto 0 auto;
-  padding: .4em 1em;
-  text-shadow: 0 1px 0 #fff;
-  font-family: "Oswald", sans-serif; }
-
-input#weather-zip {
-  width: 20%; }
-
-.newsBtn {
-  background-color: #000000;
-  color: #F5FAFA;
-  border-style: none;
-  box-shadow: 0 2px 1px #6e6e6e;
-  margin: 5px; }
-
-#news-results {
-  height: 70vh;
-  overflow-y: scroll;
-  font-family: "Oswald", sans-serif;
-  width: 30vw;
-  float: right; }
-  #news-results a {
-    text-decoration: none;
-    cursor: pointer; }
-    #news-results a h2 {
-      color: black;
-      font-size: large; }
-  #news-results h4 {
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-size: medium;
-    color: #270075; }
-  #news-results p {
-    font-size: small;
-    color: #1D3257; }

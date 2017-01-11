@@ -20,8 +20,8 @@ function getLatLong(req, res, next){
     
 
 function getCurrentWeather(req, res, next){
-	var lat = res.locationInfo.lat
-	var long = res.locationInfo.lng
+	let lat = res.locationInfo.lat
+	let long = res.locationInfo.lng
 	fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${API_KEY}&mode=json&units=imperial`)
 	.then((response)=>{
 		response.json().then((body)=>{
