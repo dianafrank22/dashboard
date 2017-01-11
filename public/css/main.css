@@ -64,10 +64,33 @@ input#weather-zip {
     font-size: small;
     color: black; }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; }
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap; }
+  .dash-section {
+    flex-grow: 1; }
+  header h2 {
+    font-size: -webkit-xxx-large; }
+  div#weather {
+    text-align: center; }
+    div#weather img {
+      width: 20%; }
+  div#news-results {
+    width: 90%;
+    margin: 5%;
+    margin-top: 0.5%;
+    text-align: left; }
+    div#news-results h2 {
+      font-size: 1.7em; }
+    div#news-results p {
+      font-size: 1.4em; }
+    div#news-results h4 {
+      font-size: 1.2em; }
+  div#news.dash-section.news kbd {
+    margin-left: 30%; } }
 
 /* CSS Normalize */
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {

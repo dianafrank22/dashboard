@@ -1,25 +1,70 @@
-// div  id news-results
-//     width: 90%;
-    // text-align: left;
-    // margin: 5%;
-    // margin-top: 0.5%;
-
-    // div id weather
-    // width: 100%
-    // text-align: center;
-
-    // img in div width 20%
-
-    // header font-szie -webkit-xxx-large
-
-    // kdb news margin-left 30%
-
-
-    // justify-content: flex-start
-
-
-    .container{
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+  	.container{
     	display: flex;
     	flex-direction: column;
     	justify-content: flex-start;
+    	flex-wrap: wrap;
     }
+
+    .dash-section{
+    	flex-grow: 1;
+    }
+
+    header h2{
+    	font-size: -webkit-xxx-large;
+    }
+
+    div#weather{
+    	text-align: center;
+
+    	img{
+    		width: 20%;
+    	}
+    }
+
+    div#news-results{
+    	width: 90%;
+    	margin: 5%;
+    	margin-top: 0.5%;
+    	text-align: left;
+    	h2{
+    		font-size: 1.7em;
+    	}
+    	p{
+    		font-size: 1.4em;
+    	}
+    	h4{
+    		font-size: 1.2em;
+    	}
+    }
+
+    div#news.dash-section.news{
+    	kbd{
+    		margin-left: 30%;
+    	}
+    }
+
+}
+
+
+// iphone6 portrait 
+    @media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) { 
+
+}
+
+
+// iphone 6 landscape
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
+
+}
