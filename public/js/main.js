@@ -1,6 +1,5 @@
 window.addEventListener('keyup', getKey)
 
-
 function getKey(e){
 	let key = e.keyCode
 	switch(key){
