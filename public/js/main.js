@@ -1,15 +1,21 @@
-window.addEventListener('keyup', getKey)
+let kbd = document.getElementsByTagName('KBD')
+for(let i=0; i<kbd.length; i++){
+	console.log(i)
+	console.log(kbd[i])
+	kbd[i].addEventListener('click', getKey)
+}
 
 function getKey(e){
-	let key = e.keyCode
+	console.log(e)
+	let key = e.target.innerText
 	switch(key){
 		case 84:
 			train();
 			break;
-		case 87:
+		case "Weather":
 			getCurrentWeather();		
 			break;
-		case 78:
+		case "News":
 			createButtons()
 			break;
 		default:
