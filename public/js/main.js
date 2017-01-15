@@ -130,7 +130,6 @@ function getIcon(weatherIcon){
 	}else if(weatherIcon === "50d" || weatherIcon ==="50n"){
 		icon = "/icons/haze.svg"
 	}
-
 	let xhr = new XMLHttpRequest(),
 		method= "GET",
 		url = icon;
@@ -154,7 +153,18 @@ function getDailyWeather(lat, lng, currentWeather){
 }
 
 function parseWeather(dailyWeather){
-	// console.log(dailyWeather)
+	let daily_div = document.getElementById('daily-weather')
+	// daily_div.innerHTML =""
+	let daily_weather = dailyWeather.dailyWeather.list
+	console.log(daily_weather)
+	for(let i=0; i < daily_weather.length;i++){
+		let temp = daily_weather[i].temp.day
+		let forecast = daily_weather[i].weather[0].description
+		let icon = daily_weather[i].weather[0].icon
+		console.log(temp)
+		console.log(forecast)
+		console.log(icon)
+	}
 }
 
 
