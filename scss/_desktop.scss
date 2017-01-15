@@ -76,6 +76,10 @@ input#weather-zip{
 	border-style: none;
 	box-shadow: $box-shadow;
 	margin: 5px;
+	font-size: 15px;
+	border-radius: 3px;
+	padding: .4em 1em;
+	font-family: $font;
 }
 
 #news-results{
@@ -85,6 +89,7 @@ input#weather-zip{
 	width: $container-width /2;
 	float: right;
 	clear: both;
+	padding-left: 10px;
 
 a{
 	text-decoration: none;
