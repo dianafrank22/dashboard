@@ -93,8 +93,8 @@ function getCurrentWeather(){
 }
 
 function addCurrentWeather(currentWeather){
-    let weatherDiv       = document.getElementById("weather");
-    weatherDiv.innerHTML = "";
+    let weatherDiv       = document.getElementById("current");
+    if(weatherDiv)weatherDiv.innerHTML = "";
     let h2               = document.createElement("H2");
     let title            = document.createTextNode("Current Weather in "+currentWeather.name);
     h2.appendChild(title);
@@ -106,7 +106,7 @@ function addCurrentWeather(currentWeather){
 }
 
 function getIcon(weatherIcon){
-    let weatherDiv = document.getElementById("weather");
+    let weatherDiv = document.getElementById("current");
     if(weatherIcon ==="01d"){
         var icon = "/icons/day.svg";
     }else if(weatherIcon ==="01n"){
@@ -152,25 +152,33 @@ function getDailyWeather(lat, lng){
     });
 }
 
-function parseWeather(dailyWeather){
-    console.log(dailyWeather)
+function parseWeather(weather){
     let daily_div = document.getElementById("daily-weather");
     if(daily_div)daily_div.innerHTML ="";    
     console.log(daily_div)
+    let title          = document.createTextNode(`Daily Weather in ${weather.dailyWeather.city.name} for the next ${weather.dailyWeather.cnt} days`);
     let h3             = document.createElement("H3");
-    let title          = document.createTextNode(`Daily Weather in ${dailyWeather.city.name} for the next ${dailyWeather.cnt} days`);
     h3.appendChild(title);
     daily_div.appendChild(h3)
-    let daily_weather = dailyWeather.dailyWeather.list;
+    let daily_weather = weather.dailyWeather.list;
     for(let i=0; i < daily_weather.length;i++){
         let div = document.createElement('DIV')
         div.setAttribute('class', 'daily-weather-div')
-        let temp = daily_weather[i].temp.day;
-        let forecast = daily_weather[i].weather[0].description;
-        let icon = daily_weather[i].weather[0].icon;
-        console.log(temp);
-        console.log(forecast);
-        console.log(icon);
+        let icon = `http://openweathermap.org/img/w/${daily_weather[i].weather[0].icon}.png`;
+        let img = document.createElement('img');
+        img.src = icon
+        div.appendChild(img)
+        let h5 = document.createElement("H5")
+        let high = daily_weather[i].temp.max;
+        let low = daily_weather[i].temp.min;
+        let temp = document.createTextNode(`H: ${high} L:${low}`);
+        h5.appendChild(temp);
+        let h6 = document.createElement('H6');
+        let forecast = document.createTextNode(`${daily_weather[i].weather[0].main}`);
+        h6.appendChild(forecast);
+        div.appendChild(h5);
+        div.appendChild(h6);
+        daily_div.appendChild(div)
     }
 }
 

@@ -106,3 +106,13 @@ p {
 }	
 
 }
+
+div#daily-weather{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	.daily-weather-div{
+		border: black solid;
+		padding: 5px;
+	}
+}
