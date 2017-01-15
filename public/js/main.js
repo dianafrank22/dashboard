@@ -153,10 +153,18 @@ function getDailyWeather(lat, lng){
 }
 
 function parseWeather(dailyWeather){
+    console.log(dailyWeather)
     let daily_div = document.getElementById("daily-weather");
-    daily_div.innerHTML ="";
+    if(daily_div)daily_div.innerHTML ="";    
+    console.log(daily_div)
+    let h3             = document.createElement("H3");
+    let title          = document.createTextNode(`Daily Weather in ${dailyWeather.city.name} for the next ${dailyWeather.cnt} days`);
+    h3.appendChild(title);
+    daily_div.appendChild(h3)
     let daily_weather = dailyWeather.dailyWeather.list;
     for(let i=0; i < daily_weather.length;i++){
+        let div = document.createElement('DIV')
+        div.setAttribute('class', 'daily-weather-div')
         let temp = daily_weather[i].temp.day;
         let forecast = daily_weather[i].weather[0].description;
         let icon = daily_weather[i].weather[0].icon;
