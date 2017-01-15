@@ -1,13 +1,10 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 let kbd = document.getElementsByTagName('KBD')
 for(let i=0; i<kbd.length; i++){
-	console.log(i)
-	console.log(kbd[i])
 	kbd[i].addEventListener('click', getKey)
 }
 
 function getKey(e){
-	console.log(e)
 	let key = e.target.innerText
 	switch(key){
 		case 84:
@@ -26,9 +23,8 @@ function getKey(e){
 
 
 function createButtons(){
-	let news = document.getElementById('news')
+	let news = document.getElementById('buttons')
 	if(news.childNodes.length > 5) return;
-		//buttons already created
 	let titles = ["technology", "upshot", "politics", "national"]
 	for(let i =0; i < titles.length; i++){
 		let btn = document.createElement("BUTTON");
@@ -133,7 +129,7 @@ function getIcon(weatherIcon){
 	}else if(weatherIcon === "13d" || weatherIcon ==="13n"){
 		icon = "/icons/snowy-6.svg"
 	}else if(weatherIcon === "50d" || weatherIcon ==="50n"){
-		icon = `http://openweathermap.org/img/w/${weatherIcon}.png`
+		icon = "/icons/haze.svg"
 	}
 
 	let xhr = new XMLHttpRequest(),
@@ -142,7 +138,6 @@ function getIcon(weatherIcon){
 	xhr.open(method, url, true);
 	xhr.setRequestHeader('Content-Type', 'image/svg+xml')
 	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState)
 		if(xhr.readyState !=4)return;
 		let svg = xhr.responseXML.documentElement;
 		svg =document.importNode(svg,true)

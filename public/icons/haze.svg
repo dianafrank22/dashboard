@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 288.404 288.404" style="enable-background:new 0 0 288.404 288.404;" xml:space="preserve">
+
+ <style type="text/css"><![CDATA[svg{
+  height: 30%;
+  width: 30%;
+}
+
+#mist{
+   -webkit-animation-name: mist-movement;
+     -moz-animation-name: mist-movement;
+      -ms-animation-name: mist-movement;
+          animation-name: mist-movement;
+  -webkit-animation-duration: 11s;
+     -moz-animation-duration: 11s;
+      -ms-animation-duration: 11s;
+          animation-duration: 11s;
+  -webkit-animation-timing-function: linear;
+     -moz-animation-timing-function: linear;
+      -ms-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+      -ms-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+@keyframes mist-movement{
+  0%{
+    opacity: 0;
+  }
+  30%{
+    opacity: 0.2;
+  }
+   60%{
+    opacity: 0.5;
+  }
+  80%{
+  opacity: 0.8;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+]]></style>	 
+<g>
+	<path id="mist" fill="#57A0EE" d="M212.086,46.19h-143.8c-3.554,0-6.427-2.879-6.427-6.427c0-3.548,2.873-6.427,6.427-6.427h143.8
+		c3.554,0,6.427,2.879,6.427,6.427C218.512,43.31,215.64,46.19,212.086,46.19z M255.467,69.603c0-3.548-2.873-6.427-6.427-6.427
+		H7.23c-3.548,0-6.427,2.879-6.427,6.427s2.879,6.427,6.427,6.427h241.81C252.594,76.029,255.467,73.15,255.467,69.603z
+		 M218.512,99.442c0-3.548-2.873-6.427-6.427-6.427H8.034c-3.548,0-6.427,2.879-6.427,6.427s2.879,6.427,6.427,6.427h204.052
+		C215.64,105.869,218.512,102.996,218.512,99.442z M287.601,129.282c0-3.554-2.873-6.427-6.427-6.427H77.122
+		c-3.554,0-6.427,2.873-6.427,6.427c0,3.554,2.873,6.427,6.427,6.427h204.052C284.728,135.709,287.601,132.836,287.601,129.282z
+		 M274.747,159.116c0-3.554-2.873-6.427-6.427-6.427H35.348c-3.554,0-6.427,2.873-6.427,6.427c0,3.554,2.873,6.427,6.427,6.427
+		H268.32C271.874,165.542,274.747,162.67,274.747,159.116z M253.86,188.955c0-3.554-2.873-6.427-6.427-6.427H6.427
+		c-3.548,0-6.427,2.873-6.427,6.427s2.879,6.427,6.427,6.427h241.006C250.987,195.382,253.86,192.503,253.86,188.955z
+		 M288.404,218.802c0-3.554-2.873-6.427-6.427-6.427H93.992c-3.554,0-6.427,2.873-6.427,6.427s2.873,6.427,6.427,6.427h187.985"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
