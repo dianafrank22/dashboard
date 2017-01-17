@@ -18,7 +18,9 @@
     "express": "^4.14.0",
     "morgan": "^1.7.0",
     "node-fetch": "^1.6.3",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react": "^15.4.2",
+    "webpack": "^1.14.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
