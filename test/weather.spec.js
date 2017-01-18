@@ -1,13 +1,11 @@
-let weather = require("../apis/weather");
-let chai = require("chai");
-let sinon = require('sinon')
-let spy = sinon.spy();
+import React from 'react';
+import {mount, render, shallow} from 'enzyme'
+import Weather from '../src/components/Weather'
+import TestUtils from 'react-addons-test-utils'
+import {expect} from "chai"
+import sinon from 'sinon'
 
-var expect = chai.expect;
 
-describe("weather.js", function(){
-	// it("addTwoNumbers returns a number", function(){
-	// 	expect(main.addTwoNumbers(0,0)).to.be.a("number");
-	// });
+describe("Weather.js", function(){
 	
 })

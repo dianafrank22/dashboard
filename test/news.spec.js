@@ -1,15 +1,12 @@
-let news = require("../apis/news");
-let chai = require("chai");
-let sinon = require('sinon')
-let spy = sinon.spy();
+import React from 'react';
+import {mount, render, shallow} from 'enzyme'
+import News from '../src/components/News'
+import TestUtils from 'react-addons-test-utils'
+import {expect} from "chai"
+import sinon from 'sinon'
 
-var expect = chai.expect;
 
-describe("news.js", function(){
-	// it('Expects getNews to call the proper url', ()=>{
-		// var thisScope = nock().get().reply(200)
-		// let store = mockStore({});
-		// return store.dispatch(news.getNews())
-	// })
+describe("News.js", function(){
+
 	
 })
