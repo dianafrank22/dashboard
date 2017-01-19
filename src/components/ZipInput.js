@@ -11,7 +11,7 @@ export default class ZipInput extends React.Component{
 		return(
 			<div>
 			<input id="weather-zip" type="text" className="zip-input" onChange={this.props.changeFunction} value={this.props.zipInputValue} />
-			<kbd> Weather</kbd>
+
 			</div>
 		)
 	}
